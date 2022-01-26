@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "control-fuel",
+    "slug": "control-fuel",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "control-fuel"
+}
