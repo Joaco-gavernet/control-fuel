@@ -1,12 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useState} from 'react';
+import { Keyboard, ScrollView, StyleSheet, Text, View } from 'react-native';
+import Taskcampo from './taskcampo';
+import Itemlista from './itemlista';
+
 
 export default function App() {
+  const [tasks, setTasks] = useState([]);
+
+  const addTask = (task) => {
+    if (task == null) return;
+    setTasks([...tasks, task]);
+    Keyboard.dismiss();
+  }
+
+  const deleteTask = (deleteIndex) => {
+    setTasks(tasks.filter((value, index) => index != deleteIndex));
+  }
+
   return (
     <View style={styles.container}>
-      <Text>Hola Coder!</Text>
-      <StatusBar style="auto" />
+        <Text style={styles.heading}>MIS PENDIENTES</Text>
+      <ScrollView style={styles.scrollView}>
+        {
+        tasks.map((task, index) => {
+          return (
+            <View key={index} style={styles.taskContainer}>
+              <TaskItem index={index + 1} task={task} deleteTask={() => deleteTask(index)}/>
+            </View>
+          );
+        })
+      }
+      </ScrollView>
+      <TaskInputField addTask={addTask}/>
     </View>
   );
 }
@@ -14,8 +39,20 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#F3D250',
   },
+  heading: {
+    color: '#FFFFFF',
+    fontSize: 32,
+    fontWeight: '700',
+    marginTop: 50,
+    marginBottom: 10,
+    textAlign:'center',
+  },
+  scrollView: {
+    marginBottom: 70,
+  },
+  taskContainer: {
+    marginTop: 20,
+  }
 });
