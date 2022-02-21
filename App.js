@@ -1,8 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Keyboard, ScrollView, StyleSheet, Text, View } from 'react-native';
-import Taskcampo from './taskcampo';
-import Itemlista from './itemlista';
-
+import { TaskInputField, TaskItem } from './components/index';
 
 export default function App() {
   const [tasks, setTasks] = useState([]);
@@ -19,19 +17,19 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-        <Text style={styles.heading}>MIS PENDIENTES</Text>
+      <Text style={styles.heading}>MIS PENDIENTES</Text>
       <ScrollView style={styles.scrollView}>
         {
-        tasks.map((task, index) => {
-          return (
-            <View key={index} style={styles.taskContainer}>
-              <TaskItem index={index + 1} task={task} deleteTask={() => deleteTask(index)}/>
-            </View>
-          );
-        })
-      }
+          tasks.map((task, index) => {
+            return (
+              <View key={index} style={styles.taskContainer}>
+                <TaskItem index={index + 1} task={task} deleteTask={() => deleteTask(index)} />
+              </View>
+            );
+          })
+        }
       </ScrollView>
-      <TaskInputField addTask={addTask}/>
+      <TaskInputField addTask={addTask} />
     </View>
   );
 }
@@ -47,7 +45,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginTop: 50,
     marginBottom: 10,
-    textAlign:'center',
+    textAlign: 'center',
   },
   scrollView: {
     marginBottom: 70,
